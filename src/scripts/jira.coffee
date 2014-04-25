@@ -160,6 +160,7 @@ module.exports = (robot) ->
   search = (msg, jql, cb) ->
     get msg, "search/?jql=#{escape(jql)}", (result) ->
       if result.errors?
+        cb "Error retrieving results: " + result.errorMessages
         return
       
       resultText = "I found #{result.total} issues for your search. #{process.env.HUBOT_JIRA_URL}/secure/IssueNavigator.jspa?reset=true&jqlQuery=#{escape(jql)}"
